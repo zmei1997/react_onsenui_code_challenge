@@ -6,9 +6,28 @@ import { Routes, Route, useNavigate } from 'react-router';
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
-let checkboxItems = ["a", "b", "c"];
-let radioItems = ["aa", "bb", "cc"];
-let selectItems = ["aaa", "bbb", "ccc"];
+// sample radio items
+let platform = [
+  {id:1, name:"Windows"},
+  {id:2, name:"Mac"},
+  {id:3, name:"Virtual Reality"}
+];
+
+// sample checkbox items
+let categories = [
+  {id:1, name:"First-Person Shooter"},
+  {id:2, name:"Adventure RPG"},
+  {id:3, name:"Sports"}
+];
+
+// sample selection items
+let games = [
+  {id:1, name:"Call of Duty: Black Ops"},
+  {id:2, name:"Battlefield V"},
+  {id:3, name:"Final Fantasy X"},
+  {id:4, name:"FIFA 22"},
+  {id:5, name:"Forza Horizon 5"}
+];
 
 function Toolbar(props) {
   return (
@@ -38,7 +57,8 @@ function Home(props) {
     <Ons.Page renderToolbar={() => <Toolbar title={props.title} goToBack={false} />}>
       <section style={{ textAlign: 'center' }}>
         <div>
-          <h2>User Information</h2>
+          <h1>User Information</h1>
+          <h3>Please verify your username and birtday:</h3>
           <label>Username: </label>
           <Ons.Input modifier='material' placeholder='Enter Your Name' onChange={(event) => props.setName(event.target.value)}></Ons.Input>
           <br></br>
@@ -47,24 +67,24 @@ function Home(props) {
         </div>
         <br></br>
         <div>
-          <h2>Categories</h2>
-          <label>Please check one or more: </label>
-          {checkboxItems.map((item) => <div key={item.toString()}><Ons.Checkbox value={item} /><label>{item}</label></div>)}
-        </div>
-        <br></br>
-        <div>
-          <h2>Artists</h2>
+          <h1>Platform</h1>
           <label>Please choose one: </label>
-          {radioItems.map((item) => <div key={item.toString()}><Ons.Radio modifier='material' value={item} onChange={event => props.setRadioVal(event.target.value)} /><label>{item}</label></div>)}
+          {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} onChange={event => props.setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
           {console.log(props.radioVal)}
         </div>
         <br></br>
         <div>
-          <h2>Songs</h2>
+          <h2>Categories</h2>
+          <label>Please check one or more: </label>
+          {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} /><label>{item.name}</label></div>)}
+        </div>
+        <br></br>
+        <div>
+          <h2>Games</h2>
           <label>Please select one: </label>
           <br></br>
           <Ons.Select modifier='material'>
-            {selectItems.map((item) => <option key={item.toString()} value={item}>{item}</option>)}
+            {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
           </Ons.Select>
           <br></br>
         </div>
