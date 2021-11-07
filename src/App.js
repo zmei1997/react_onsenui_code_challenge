@@ -45,14 +45,17 @@ function ViewResult(props) {
     <Ons.Page renderToolbar={() => <Toolbar title={props.title} goToBack={true} navigate={props.navigate} />}>
       <section style={{ textAlign: 'center' }}>
         <h3>Welcome {props.name}</h3>
-        <h3>Radio value {props.radioVal}</h3>
+        <h3>Platform: {props.radioVal}</h3>
+        {console.log(props.checkboxVal[1])}
+        <h3>Categories: {props.checkboxVal[0]}</h3>
+        <h3>Games: {props.selectionVal}</h3>
       </section>
     </Ons.Page>
   );
 }
 
 function Home(props) {
-
+  let list = [];
   return (
     <Ons.Page renderToolbar={() => <Toolbar title={props.title} goToBack={false} />}>
       <section style={{ textAlign: 'center' }}>
@@ -70,20 +73,19 @@ function Home(props) {
           <h1>Platform</h1>
           <label>Please choose one: </label>
           {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} onChange={event => props.setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
-          {console.log(props.radioVal)}
         </div>
         <br></br>
         <div>
           <h2>Categories</h2>
           <label>Please check one or more: </label>
-          {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} /><label>{item.name}</label></div>)}
+          {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={e => props.setCheckboxVal(list.push(e.target.value))} /><label>{item.name}</label></div>)}
         </div>
         <br></br>
         <div>
           <h2>Games</h2>
           <label>Please select one: </label>
           <br></br>
-          <Ons.Select modifier='material'>
+          <Ons.Select modifier='material' onChange={e => props.setSelectionVal(e.target.value)}>
             {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
           </Ons.Select>
           <br></br>
@@ -99,15 +101,17 @@ function App() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const [radioVal, setRadioVal] = useState("");
+  const [checkboxVal, setCheckboxVal] = useState([]);
+  const [selectionVal, setSelectionVal] = useState("");
 
   return (
     <div className='App'>
       <Home />
       <Routes>
-        <Route path="/" element={<Home title="Home" navigate={navigate} name={name} setName={setName} radioVal={radioVal} setRadioVal={setRadioVal} />} />
+        <Route path="/" element={<Home title="Home" navigate={navigate} name={name} setName={setName} radioVal={radioVal} setRadioVal={setRadioVal} checkboxVal={checkboxVal} setCheckboxVal={setCheckboxVal} selectionVal={selectionVal} setSelectionVal={setSelectionVal}/>} />
         <Route
           path="/review"
-          element={<ViewResult title="Review" navigate={navigate} name={name} radioVal={radioVal} />} />
+          element={<ViewResult title="Review" navigate={navigate} name={name} radioVal={radioVal} checkboxVal={checkboxVal} selectionVal={selectionVal} />} />
       </Routes>
     </div>
   );
