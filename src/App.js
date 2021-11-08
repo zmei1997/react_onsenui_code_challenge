@@ -122,6 +122,7 @@ function App() {
   return (
     <div className='App'>
       <Ons.Navigator
+        swipeable
         initialRoute={{ component: Home, props: { key: "home", navigator: navigator } }}
         renderPage={renderPage}
       />
