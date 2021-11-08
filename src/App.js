@@ -30,15 +30,18 @@ function ReviewInfo(props) {
         <h2>Welcome {props.name}</h2>
         <h3 className="result_label">Birtday: </h3>
         <p className="result_item">{props.date}</p>
-        <h3 className="result_label">Platform: </h3>
+        <h3 className="result_label">Platform Preference: </h3>
         <p className="result_item">{props.radioVal}</p>
-        <h3 className="result_label">Categories: </h3>
+        <h3 className="result_label">Category Preferences: </h3>
         <ul className="result_item">
           {[...checkboxValues].map(item => <li key={item.toString()}>{item}</li>)}
         </ul>
         <h3 className="result_label">Games: </h3>
         <p className="result_item">{props.selectionVal}</p>
       </Ons.Card>
+      <div className="github_link">
+        <a href="https://github.com/zmei1997/react_onsenui_code_challenge" target="_blank" rel="noreferrer">View documentations <br></br>and source code on GitHub</a>
+      </div>
     </Ons.Page>
   );
 }
@@ -91,7 +94,7 @@ function Home(props) {
     <Ons.Page renderToolbar={renderToolbar}>
       <section style={{ textAlign: 'center' }}>
         <div>
-          <h2>User Information</h2>
+          <h3>User Information</h3>
           <Ons.Card style={{ textAlign: 'center' }}>
             <label>Please verify your username and birtday:</label><br></br>
             <label><b>Username: </b></label>
@@ -102,9 +105,9 @@ function Home(props) {
           </Ons.Card>
         </div>
         <div>
-          <h2>Platform</h2>
+          <h3>Platform</h3>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Please choose one: </label><br></br>
+            <label>Your <b>platform preference</b> (Please choose one): </label><br></br>
             <div className="platform">
               {sampleDataStore.platform.map((item) =>
                 <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event) => setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
@@ -112,18 +115,18 @@ function Home(props) {
           </Ons.Card>
         </div>
         <div>
-          <h2>Categories</h2>
+          <h3>Categories</h3>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Please choose one or more: </label><br></br>
+            <label>Your <b>category preferences</b> (Please choose one or more): </label><br></br>
             <div className="catagories">
               {sampleDataStore.categories.map((item) => <div key={item.id}><RenderCheckbox item={item} /></div>)}
             </div>
           </Ons.Card>
         </div>
         <div>
-          <h2>Games</h2>
+          <h3>Games</h3>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Please select one: </label><br></br>
+            <label>Please select one of the following games you played: </label><br></br>
             <Ons.Select modifier='material' value={selectionVal} onChange={(event) => setSelectionVal(event.target.value)}>
               {sampleDataStore.games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
             </Ons.Select>

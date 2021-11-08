@@ -10,17 +10,17 @@
         },
         {
             "id": 3,
-            "name": "Linux"
+            "name": "Xbox"
         },
         {
             "id": 4,
-            "name": "Virtual Reality"
+            "name": "PlayStation"
         }
     ],
     "categories": [
         {
             "id": 1,
-            "name": "First_Person Shooter"
+            "name": "First-Person Shooter"
         },
         {
             "id": 2,
@@ -29,6 +29,10 @@
         {
             "id": 3,
             "name": "Sports"
+        },
+        {
+            "id": 4,
+            "name": "Simulation"
         }
     ],
     "games": [
@@ -50,11 +54,27 @@
         },
         {
             "id": 4,
-            "name": "FIFA 22"
+            "name": "FIFA 20"
         },
         {
             "id": 5,
-            "name": "Forza Horizon 5"
+            "name": "Forza Horizon 3"
+        },
+        {
+            "id": 6,
+            "name": "Forza Horizon 4"
+        },
+        {
+            "id": 7,
+            "name": "Beat Saber"
+        },
+        {
+            "id": 8,
+            "name": "Half-Life: Alyx"
+        },
+        {
+            "id": 9,
+            "name": "Fallout 4 VR"
         }
     ]
 }
