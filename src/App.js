@@ -9,7 +9,8 @@ import 'onsenui/css/onsen-css-components.css';
 let platform = [
   { id: 1, name: "Windows" },
   { id: 2, name: "Mac" },
-  { id: 3, name: "Virtual Reality" }
+  { id: 3, name: "Linux" },
+  { id: 4, name: "Virtual Reality" }
 ];
 
 // sample checkbox items
@@ -46,13 +47,19 @@ function ViewResult(props) {
 
   return (
     <Ons.Page renderToolbar={toolBar}>
-        <Ons.Card style={{ textAlign: 'center' }}>
-          <h3>Welcome {props.name}</h3>
-          <h3>Birtday: {props.date}</h3>
-          <h3>Platform: {props.radioVal}</h3>
-          <h3>Categories: {props.checkboxVal}</h3>
-          <h3>Games: {props.selectionVal}</h3>
-        </Ons.Card>
+      <Ons.Card style={{ textAlign: 'center' }}>
+        <h2>Welcome {props.name}</h2>
+        <h3 className="result_label">Birtday: </h3>
+        <p className="result_item">{props.date}</p>
+        <h3 className="result_label">Platform: </h3>
+        <p className="result_item">{props.radioVal}</p>
+        <h3 className="result_label">Categories: </h3>
+        <ul className="result_item">
+          {[...props.checkboxVal].map(item => <li key={item.toString()}>{item}</li>)}
+        </ul>
+        <h3 className="result_label">Games: </h3>
+        <p className="result_item">{props.selectionVal}</p>
+      </Ons.Card>
     </Ons.Page>
   );
 }
@@ -60,7 +67,7 @@ function ViewResult(props) {
 function Home(props) {
   const [name, setName] = useState("");
   const [date, setDate] = useState();
-  const [radioVal, setRadioVal] = useState("");
+  const [radioVal, setRadioVal] = useState("Windows");
   const [checkboxVal, setCheckboxVal] = useState(new Set());
   const [selectionVal, setSelectionVal] = useState("select a value");
 
@@ -76,35 +83,38 @@ function Home(props) {
     <Ons.Page renderToolbar={renderToolbar}>
       <section style={{ textAlign: 'center' }}>
         <div>
-          <h1>User Information</h1>
-          <h3>Please verify your username and birtday:</h3>
+          <h2>User Information</h2>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Username: </label>
+            <label>Please verify your username and birtday:</label><br></br>
+            <label><b>Username: </b></label>
             <Ons.Input modifier='material' placeholder='Enter Your Name' onChange={(event) => setName(event.target.value)}></Ons.Input>
             <br></br>
-            <label>Birth Date: </label>
+            <label><b>Birth Date: </b></label>
             <Ons.Input modifier='material' type='Date' onChange={(event) => setDate(event.target.value)}></Ons.Input>
           </Ons.Card>
         </div>
         <div>
-          <h1>Platform</h1>
+          <h2>Platform</h2>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Please choose one: </label>
-            {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event) => setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
+            <label>Please choose one: </label><br></br>
+            <div className="platform">
+              {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event) => setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
+            </div>
           </Ons.Card>
         </div>
         <div>
           <h2>Categories</h2>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Please check one or more: </label>
-            {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event) => setCheckboxVal(set.add(event.target.value))} /><label>{item.name}</label></div>)}
+            <label>Please choose one or more: </label><br></br>
+            <div className="catagories">
+              {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event) => setCheckboxVal(set.add(event.target.value))} /><label>{item.name}</label></div>)}
+            </div>
           </Ons.Card>
         </div>
         <div>
           <h2>Games</h2>
           <Ons.Card style={{ textAlign: 'center' }}>
-            <label>Please select one: </label>
-            <br></br>
+            <label>Please select one: </label><br></br>
             <Ons.Select modifier='material' value={selectionVal} onChange={(event) => setSelectionVal(event.target.value)}>
               {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
             </Ons.Select>

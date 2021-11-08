@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.result_label {
+  text-align: left;
+}
+
+.result_item {
+  text-align: left;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.platform, .catagories {
+  text-align: left;
+  padding-left: 35%;
+}
