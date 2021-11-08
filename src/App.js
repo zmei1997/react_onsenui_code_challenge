@@ -1,35 +1,11 @@
 import './App.css';
 import * as Ons from 'react-onsenui';
-import ons from 'onsenui';
 import React, { useState } from 'react';
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
+import sampleDataStore from './sampleData.json'
 
-// sample radio items
-let platform = [
-  { id: 1, name: "Windows" },
-  { id: 2, name: "Mac" },
-  { id: 3, name: "Linux" },
-  { id: 4, name: "Virtual Reality" }
-];
-
-// sample checkbox items
-let categories = [
-  { id: 1, name: "First-Person Shooter" },
-  { id: 2, name: "Adventure RPG" },
-  { id: 3, name: "Sports" }
-];
-
-// sample selection items
-let games = [
-  { id: 0, name: "select a value" },
-  { id: 1, name: "Call of Duty: Black Ops" },
-  { id: 2, name: "Battlefield V" },
-  { id: 3, name: "Final Fantasy X" },
-  { id: 4, name: "FIFA 22" },
-  { id: 5, name: "Forza Horizon 5" }
-];
-
+// a Set use to store checkbox muilti-selection data
 var set = new Set();
 
 function ViewResult(props) {
@@ -98,7 +74,7 @@ function Home(props) {
           <Ons.Card style={{ textAlign: 'center' }}>
             <label>Please choose one: </label><br></br>
             <div className="platform">
-              {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event) => setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
+              {sampleDataStore.platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event) => setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
             </div>
           </Ons.Card>
         </div>
@@ -107,7 +83,7 @@ function Home(props) {
           <Ons.Card style={{ textAlign: 'center' }}>
             <label>Please choose one or more: </label><br></br>
             <div className="catagories">
-              {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event) => setCheckboxVal(set.add(event.target.value))} /><label>{item.name}</label></div>)}
+              {sampleDataStore.categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event) => setCheckboxVal(set.add(event.target.value))} /><label>{item.name}</label></div>)}
             </div>
           </Ons.Card>
         </div>
@@ -116,7 +92,7 @@ function Home(props) {
           <Ons.Card style={{ textAlign: 'center' }}>
             <label>Please select one: </label><br></br>
             <Ons.Select modifier='material' value={selectionVal} onChange={(event) => setSelectionVal(event.target.value)}>
-              {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
+              {sampleDataStore.games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
             </Ons.Select>
           </Ons.Card>
         </div>

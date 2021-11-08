@@ -1,0 +1,60 @@
+{
+    "platform": [
+        {
+            "id": 1,
+            "name": "Windows"
+        },
+        {
+            "id": 2,
+            "name": "Mac"
+        },
+        {
+            "id": 3,
+            "name": "Linux"
+        },
+        {
+            "id": 4,
+            "name": "Virtual Reality"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "First-Person Shooter"
+        },
+        {
+            "id": 2,
+            "name": "Adventure RPG"
+        },
+        {
+            "id": 3,
+            "name": "Sports"
+        }
+    ],
+    "games": [
+        {
+            "id": 0,
+            "name": "select a value"
+        },
+        {
+            "id": 1,
+            "name": "Call of Duty: Black Ops"
+        },
+        {
+            "id": 2,
+            "name": "Battlefield V"
+        },
+        {
+            "id": 3,
+            "name": "Final Fantasy X"
+        },
+        {
+            "id": 4,
+            "name": "FIFA 22"
+        },
+        {
+            "id": 5,
+            "name": "Forza Horizon 5"
+        }
+    ]
+}
