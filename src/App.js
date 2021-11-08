@@ -35,7 +35,8 @@ function ViewResult(props) {
     return (
       <Ons.Toolbar>
         <div className="left">
-          <Ons.BackButton>Back</Ons.BackButton>
+          <Ons.BackButton>Back</Ons.BackButton> 
+          {/* TODO: if go back to home page, initialize all data */}
         </div>
         <div className='center'>View Result</div>
       </Ons.Toolbar>
@@ -56,6 +57,11 @@ function ViewResult(props) {
 }
 
 function Home(props) {
+  const [name, setName] = useState("");
+  const [radioVal, setRadioVal] = useState("");
+  const [checkboxVal, setCheckboxVal] = useState(new Set());
+  const [selectionVal, setSelectionVal] = useState("Call of Duty: Black Ops");
+
   function renderToolbar() {
     return (
       <Ons.Toolbar>
@@ -71,7 +77,7 @@ function Home(props) {
           <h1>User Information</h1>
           <h3>Please verify your username and birtday:</h3>
           <label>Username: </label>
-          <Ons.Input modifier='material' placeholder='Enter Your Name'></Ons.Input>
+          <Ons.Input modifier='material' placeholder='Enter Your Name' onChange={(event)=>setName(event.target.value)}></Ons.Input>
           <br></br>
           <label>Birth Date: </label>
           <Ons.Input modifier='material' type='Date'></Ons.Input>
@@ -80,37 +86,32 @@ function Home(props) {
         <div>
           <h1>Platform</h1>
           <label>Please choose one: </label>
-          {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} /><label>{item.name}</label></div>)}
+          {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event)=>setRadioVal(event.target.value)}/><label>{item.name}</label></div>)}
         </div>
         <br></br>
         <div>
           <h2>Categories</h2>
           <label>Please check one or more: </label>
-          {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} /><label>{item.name}</label></div>)}
+          {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event)=>setCheckboxVal(set.add(event.target.value))}/><label>{item.name}</label></div>)}
         </div>
         <br></br>
         <div>
           <h2>Games</h2>
           <label>Please select one: </label>
           <br></br>
-          <Ons.Select modifier='material'>
+          <Ons.Select modifier='material' value={selectionVal} onChange={(event)=>setSelectionVal(event.target.value)}>
             {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
           </Ons.Select>
           <br></br>
         </div>
         <br></br>
-        <Ons.Button onClick={() => props.navigator.pushPage({component: ViewResult, props:{key:"viewResult"}})}>Submit</Ons.Button>
+        <Ons.Button onClick={() => props.navigator.pushPage({ component: ViewResult, props: { key: "viewResult", name:name, radioVal:radioVal, checkboxVal:checkboxVal, selectionVal:selectionVal} })}>Submit</Ons.Button>
       </section>
     </Ons.Page>
   );
 }
 
 function App() {
-  // const [name, setName] = useState("");
-  // const navigate = useNavigate();
-  // const [radioVal, setRadioVal] = useState("");
-  // const [checkboxVal, setCheckboxVal] = useState(new Set());
-  // const [selectionVal, setSelectionVal] = useState("");
 
   function renderPage(route, navigator) {
     route.props = route.props || {};
@@ -124,13 +125,6 @@ function App() {
         initialRoute={{ component: Home, props: { key: "home", navigator: navigator } }}
         renderPage={renderPage}
       />
-      {/* <Home />
-      <Routes>
-        <Route path="/" element={<Home title="Home" navigate={navigate} name={name} setName={setName} radioVal={radioVal} setRadioVal={setRadioVal} checkboxVal={checkboxVal} setCheckboxVal={setCheckboxVal} selectionVal={selectionVal} setSelectionVal={setSelectionVal}/>} />
-        <Route
-          path="/review"
-          element={<ViewResult title="Review" navigate={navigate} name={name} radioVal={radioVal} checkboxVal={checkboxVal} selectionVal={selectionVal} />} />
-      </Routes> */}
     </div>
   );
 }
