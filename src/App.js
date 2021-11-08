@@ -21,6 +21,7 @@ let categories = [
 
 // sample selection items
 let games = [
+  { id: 0, name: "select a value" },
   { id: 1, name: "Call of Duty: Black Ops" },
   { id: 2, name: "Battlefield V" },
   { id: 3, name: "Final Fantasy X" },
@@ -35,7 +36,7 @@ function ViewResult(props) {
     return (
       <Ons.Toolbar>
         <div className="left">
-          <Ons.BackButton>Back</Ons.BackButton> 
+          <Ons.BackButton>Back</Ons.BackButton>
           {/* TODO: if go back to home page, initialize all data */}
         </div>
         <div className='center'>View Result</div>
@@ -45,22 +46,23 @@ function ViewResult(props) {
 
   return (
     <Ons.Page renderToolbar={toolBar}>
-      <section style={{ textAlign: 'center' }}>
-        <h3>Welcome {props.name}</h3>
-        <h3>Platform: {props.radioVal}</h3>
-        {console.log(set)}
-        <h3>Categories: {props.checkboxVal}</h3>
-        <h3>Games: {props.selectionVal}</h3>
-      </section>
+        <Ons.Card style={{ textAlign: 'center' }}>
+          <h3>Welcome {props.name}</h3>
+          <h3>Birtday: {props.date}</h3>
+          <h3>Platform: {props.radioVal}</h3>
+          <h3>Categories: {props.checkboxVal}</h3>
+          <h3>Games: {props.selectionVal}</h3>
+        </Ons.Card>
     </Ons.Page>
   );
 }
 
 function Home(props) {
   const [name, setName] = useState("");
+  const [date, setDate] = useState();
   const [radioVal, setRadioVal] = useState("");
   const [checkboxVal, setCheckboxVal] = useState(new Set());
-  const [selectionVal, setSelectionVal] = useState("Call of Duty: Black Ops");
+  const [selectionVal, setSelectionVal] = useState("select a value");
 
   function renderToolbar() {
     return (
@@ -76,36 +78,39 @@ function Home(props) {
         <div>
           <h1>User Information</h1>
           <h3>Please verify your username and birtday:</h3>
-          <label>Username: </label>
-          <Ons.Input modifier='material' placeholder='Enter Your Name' onChange={(event)=>setName(event.target.value)}></Ons.Input>
-          <br></br>
-          <label>Birth Date: </label>
-          <Ons.Input modifier='material' type='Date'></Ons.Input>
+          <Ons.Card style={{ textAlign: 'center' }}>
+            <label>Username: </label>
+            <Ons.Input modifier='material' placeholder='Enter Your Name' onChange={(event) => setName(event.target.value)}></Ons.Input>
+            <br></br>
+            <label>Birth Date: </label>
+            <Ons.Input modifier='material' type='Date' onChange={(event) => setDate(event.target.value)}></Ons.Input>
+          </Ons.Card>
         </div>
-        <br></br>
         <div>
           <h1>Platform</h1>
-          <label>Please choose one: </label>
-          {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event)=>setRadioVal(event.target.value)}/><label>{item.name}</label></div>)}
+          <Ons.Card style={{ textAlign: 'center' }}>
+            <label>Please choose one: </label>
+            {platform.map((item) => <div key={item.id}><Ons.Radio modifier='material' value={item.name} checked={item.name === radioVal} onChange={(event) => setRadioVal(event.target.value)} /><label>{item.name}</label></div>)}
+          </Ons.Card>
         </div>
-        <br></br>
         <div>
           <h2>Categories</h2>
-          <label>Please check one or more: </label>
-          {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event)=>setCheckboxVal(set.add(event.target.value))}/><label>{item.name}</label></div>)}
+          <Ons.Card style={{ textAlign: 'center' }}>
+            <label>Please check one or more: </label>
+            {categories.map((item) => <div key={item.id}><Ons.Checkbox value={item.name} onChange={(event) => setCheckboxVal(set.add(event.target.value))} /><label>{item.name}</label></div>)}
+          </Ons.Card>
         </div>
-        <br></br>
         <div>
           <h2>Games</h2>
-          <label>Please select one: </label>
-          <br></br>
-          <Ons.Select modifier='material' value={selectionVal} onChange={(event)=>setSelectionVal(event.target.value)}>
-            {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
-          </Ons.Select>
-          <br></br>
+          <Ons.Card style={{ textAlign: 'center' }}>
+            <label>Please select one: </label>
+            <br></br>
+            <Ons.Select modifier='material' value={selectionVal} onChange={(event) => setSelectionVal(event.target.value)}>
+              {games.map((item) => <option key={item.id} value={item.name}>{item.name}</option>)}
+            </Ons.Select>
+          </Ons.Card>
         </div>
-        <br></br>
-        <Ons.Button onClick={() => props.navigator.pushPage({ component: ViewResult, props: { key: "viewResult", name:name, radioVal:radioVal, checkboxVal:checkboxVal, selectionVal:selectionVal} })}>Submit</Ons.Button>
+        <Ons.Button modifier="large--cta" onClick={() => props.navigator.pushPage({ component: ViewResult, props: { key: "viewResult", name: name, date: date, radioVal: radioVal, checkboxVal: checkboxVal, selectionVal: selectionVal } })}>Submit</Ons.Button>
       </section>
     </Ons.Page>
   );
