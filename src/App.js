@@ -5,21 +5,25 @@ import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 import sampleDataStore from './sampleData.json'
 
-// a set used to store multiple checkbox values
+// A set used to store multiple checkbox values
 let checkboxValues = new Set();
 
-function ViewResult(props) {
+// The component used to render ReviewInfo page
+function ReviewInfo(props) {
+
+  // function used to render the toolbar of ReviewInfo page
   function toolBar() {
     return (
       <Ons.Toolbar>
         <div className="left">
           <Ons.BackButton>Back</Ons.BackButton>
         </div>
-        <div className='center'>View Result</div>
+        <div className='center'>Review Information</div>
       </Ons.Toolbar>
     );
   }
 
+  // elements show on ReviewInfo page
   return (
     <Ons.Page renderToolbar={toolBar}>
       <Ons.Card style={{ textAlign: 'center' }}>
@@ -39,9 +43,11 @@ function ViewResult(props) {
   );
 }
 
+// The component used to render checkbox
 function RenderCheckbox(props) {
   const [checked, setChecked] = useState(false);
 
+  // function to handle checkbox event
   function handleCheckbox(event) {
     setChecked(event.target.checked);
     if (event.target.checked === true) {
@@ -58,12 +64,14 @@ function RenderCheckbox(props) {
   );
 }
 
+// The component used to render Home page
 function Home(props) {
   const [name, setName] = useState("");
   const [date, setDate] = useState();
   const [radioVal, setRadioVal] = useState("Windows");
   const [selectionVal, setSelectionVal] = useState("select a value");
 
+  // function used to render the toolbar of Home page
   function renderToolbar() {
     return (
       <Ons.Toolbar>
@@ -72,6 +80,13 @@ function Home(props) {
     );
   }
 
+  // function used to handle navigator pushPage
+  // return the ReviewInfo page
+  function pushPage() {
+    return props.navigator.pushPage({ component: ReviewInfo, props: { key: "viewResult", name: name, date: date, radioVal: radioVal, selectionVal: selectionVal } })
+  }
+
+  // elements show on the Home page
   return (
     <Ons.Page renderToolbar={renderToolbar}>
       <section style={{ textAlign: 'center' }}>
@@ -114,7 +129,9 @@ function Home(props) {
             </Ons.Select>
           </Ons.Card>
         </div>
-        <Ons.Button modifier="large--cta" onClick={() => props.navigator.pushPage({ component: ViewResult, props: { key: "viewResult", name: name, date: date, radioVal: radioVal, selectionVal: selectionVal } })}>Submit</Ons.Button>
+        <div>
+          <Ons.Button modifier="large--cta" onClick={pushPage}>Confirm</Ons.Button>
+        </div>
       </section>
     </Ons.Page>
   );
@@ -122,6 +139,8 @@ function Home(props) {
 
 function App() {
 
+  // function used to take the current route object as a parameter
+  // and return the page component
   function renderPage(route, navigator) {
     route.props = route.props || {};
     route.props.navigator = navigator;
