@@ -1,3 +1,5 @@
+// Web page using ReactJS and Onsen UI
+// author: Zhongxiao Mei
 import './App.css';
 import * as Ons from 'react-onsenui';
 import React, { useState } from 'react';
@@ -9,6 +11,7 @@ import sampleDataStore from './sampleData.json'
 let checkboxValues = new Set();
 
 // The component used to render ReviewInfo page
+// the second page
 function ReviewInfo(props) {
 
   // function used to render the toolbar of ReviewInfo page
