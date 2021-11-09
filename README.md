@@ -4,7 +4,7 @@
 1. Clone the repository or download zip file
 2. Open the project with Visual Studio Code
 3. Open a new Terminal and change the directory to the project folder
-4. **Install 'react-scripts' by entering 'npm install react-scripts --save'**
+4. Install 'react-scripts' by entering **'npm install react-scripts --save'**
 5. Enter **"npm start"** (make sure your system installed Node.js)
 6. Open a browser and go to **"localhost:3000"**
 
