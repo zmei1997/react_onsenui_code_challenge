@@ -15,16 +15,20 @@
         {
             "id": 4,
             "name": "PlayStation"
+        },
+        {
+            "id": 5,
+            "name": "Virtual Reality"
         }
     ],
     "categories": [
         {
             "id": 1,
-            "name": "First-Person Shooter"
+            "name": "FPS"
         },
         {
             "id": 2,
-            "name": "Adventure RPG"
+            "name": "ARPG"
         },
         {
             "id": 3,
@@ -33,6 +37,10 @@
         {
             "id": 4,
             "name": "Simulation"
+        },
+        {
+            "id": 5,
+            "name": "Strategy"
         }
     ],
     "games": [
